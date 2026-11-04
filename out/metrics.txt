@@ -1,0 +1,23 @@
+Project 2 - EKF IMU + GPS fusion results (synthetic data, seed 42)
+duration: 120 s at 20 Hz (2401 samples), 106 GPS fixes
+GPS outage: 72-87 s
+
+EKF position RMSE:              2.06 m
+GPS raw RMSE at fix times:      3.45 m
+GPS hold position RMSE:         29.71 m
+Dead-reckoning position RMSE:   196.01 m
+
+EKF max position error:         5.57 m
+EKF error during GPS outage:    RMSE 1.76 m, max 3.84 m
+EKF RMSE, first 5 s after GPS returns: 3.54 m
+EKF final position error:       0.65 m
+Dead-reckoning final error:     425.93 m
+
+EKF heading RMSE:               2.27 deg
+Dead-reckoning heading RMSE:    16.73 deg
+EKF speed RMSE:                 0.34 m/s
+Dead-reckoning speed RMSE:      3.74 m/s
+
+EKF RMSE improvement vs GPS raw:        40.4%
+EKF RMSE improvement vs GPS hold:       93.1%
+EKF RMSE improvement vs dead reckoning: 98.9%

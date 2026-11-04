@@ -1,0 +1,28 @@
+{
+  "seed": 42,
+  "duration_s": 120.0,
+  "samples_20hz": 2401,
+  "gps_fixes": 106,
+  "gps_outage_s": [
+    72.0,
+    87.0
+  ],
+  "ekf_position_rmse_m": 2.0598586214609944,
+  "ekf_position_max_error_m": 5.56915913005802,
+  "ekf_final_position_error_m": 0.6460873362261627,
+  "ekf_outage_rmse_m": 1.7630662827925214,
+  "ekf_outage_max_error_m": 3.839751014090087,
+  "ekf_first_5s_after_outage_rmse_m": 3.5422695810697107,
+  "gps_raw_rmse_at_fixes_m": 3.4544684551774143,
+  "gps_hold_position_rmse_m": 29.71050700203075,
+  "gps_hold_final_position_error_m": 3.7292553249587717,
+  "dead_reckoning_position_rmse_m": 196.00632941745405,
+  "dead_reckoning_final_position_error_m": 425.9267757787721,
+  "ekf_heading_rmse_deg": 2.2666434844451278,
+  "dead_reckoning_heading_rmse_deg": 16.726283913031367,
+  "ekf_speed_rmse_mps": 0.33760020059528717,
+  "dead_reckoning_speed_rmse_mps": 3.7407484773002264,
+  "ekf_rmse_improvement_vs_gps_raw_pct": 40.371184505281455,
+  "ekf_rmse_improvement_vs_gps_hold_pct": 93.06690181584516,
+  "ekf_rmse_improvement_vs_dead_reckoning_pct": 98.94908566086461
+}
