@@ -1,4 +1,4 @@
-# EKF Sensor Fusion — IMU + GPS
+# EKF Sensor Fusion - IMU + GPS
 
 An extended Kalman filter (EKF) that fuses high-rate IMU measurements with low-rate, noisy GPS fixes to estimate a moving platform's position, velocity, and heading - and quantifies exactly how much better fusion is than either sensor on its own.
 
