@@ -8,21 +8,21 @@ This is Project 2 of a three-part robotics portfolio. Project 1 (detection + tra
 
 ## Results (synthetic data, seed 42)
 
-One scripted 120-second trip at 20 Hz — acceleration, braking, left and right turns, and an S-turn — with a **15-second GPS outage** (72–87 s) in the middle:
+One scripted 120-second trip at 20 Hz - acceleration, braking, left and right turns, and an S-turn - with a **15-second GPS outage** (72–87 s) in the middle:
 
 | Estimator | Position RMSE | Final position error |
 |---|---:|---:|
 | **EKF fusion (IMU + GPS)** | **2.06 m** | **0.65 m** |
-| GPS only, raw fixes (at fix times) | 3.45 m | — |
-| GPS only, last fix held between fixes | 29.71 m | — |
+| GPS only, raw fixes (at fix times) | 3.45 m | - |
+| GPS only, last fix held between fixes | 29.71 m | - |
 | IMU only (dead reckoning) | 196.01 m | 425.93 m |
 
 More from `out/metrics.txt`:
 
 - EKF position RMSE is **40.4% lower** than raw GPS noise, **93.1% lower** than held GPS, and **98.9% lower** than dead reckoning.
-- During the GPS outage the EKF coasts on the IMU and stays accurate: **1.76 m RMSE, 3.84 m max error** — while held GPS error grows past 140 m as the platform keeps moving.
+- During the GPS outage the EKF coasts on the IMU and stays accurate: **1.76 m RMSE, 3.84 m max error** - while held GPS error grows past 140 m as the platform keeps moving.
 - EKF heading RMSE **2.27°** vs. dead reckoning's **16.73°**; speed RMSE **0.34 m/s** vs. **3.74 m/s**.
-- All numbers are from the seeded synthetic dataset in `data/` and are reproducible with one command (below). This project uses synthetic data by design — see Limitations.
+- All numbers are from the seeded synthetic dataset in `data/` and are reproducible with one command (below). This project uses synthetic data by design - see Limitations.
 
 ![Position error over time](out/position_errors.png)
 
@@ -30,8 +30,8 @@ More from `out/metrics.txt`:
 
 Neither sensor is good enough alone:
 
-- **GPS** gives an absolute position, but only at 1 Hz, with ~2.5 m of noise per axis — and it can disappear entirely (tunnels, parking structures, urban canyons).
-- **An IMU** reports acceleration and turn rate at 20 Hz, smoothly and with no outside help — but integrating noisy, biased inertial measurements drifts without bound. In this simulation, dead reckoning ends **426 m** from the true position after two minutes.
+- **GPS** gives an absolute position, but only at 1 Hz, with ~2.5 m of noise per axis - and it can disappear entirely (tunnels, parking structures, urban canyons).
+- **An IMU** reports acceleration and turn rate at 20 Hz, smoothly and with no outside help - but integrating noisy, biased inertial measurements drifts without bound. In this simulation, dead reckoning ends **426 m** from the true position after two minutes.
 
 The EKF combines them the way production localization systems do:
 
@@ -62,7 +62,7 @@ Because the new velocity depends nonlinearly on heading and speed, the predictio
 
 ### GPS update
 
-GPS measures position directly, so the measurement matrix simply selects `x` and `y` from the state. The update uses the Joseph form for numerical stability, and the measurement variance is the simulator's true value (2.5 m per axis → 6.25 m²) — the filter is not given a flattering noise model.
+GPS measures position directly, so the measurement matrix simply selects `x` and `y` from the state. The update uses the Joseph form for numerical stability, and the measurement variance is the simulator's true value (2.5 m per axis → 6.25 m²) - the filter is not given a flattering noise model.
 
 ### The simulated world
 
@@ -76,9 +76,9 @@ GPS measures position directly, so the measurement matrix simply selects `x` and
 
 ### The baselines (same trip, same data)
 
-- **GPS raw** — each fix compared to truth at its own timestamp. The honest "how noisy is GPS" number: 3.45 m RMSE.
-- **GPS hold** — the newest fix, reused until the next one arrives. This is what a GPS-only system actually outputs between fixes, and it is why held GPS collapses during the outage.
-- **Dead reckoning** — starts from the same initial estimate as the EKF and integrates the same noisy IMU stream with no corrections, ever. Its 426 m final error is what IMU bias does when nothing bounds it.
+- **GPS raw** - each fix compared to truth at its own timestamp. The honest "how noisy is GPS" number: 3.45 m RMSE.
+- **GPS hold** - the newest fix, reused until the next one arrives. This is what a GPS-only system actually outputs between fixes, and it is why held GPS collapses during the outage.
+- **Dead reckoning** - starts from the same initial estimate as the EKF and integrates the same noisy IMU stream with no corrections, ever. Its 426 m final error is what IMU bias does when nothing bounds it.
 
 ## Run it
 
@@ -97,7 +97,7 @@ Run the tests (standard-library `unittest`, no extra install):
 python -m unittest discover -s tests -v
 ```
 
-Six tests: angle wrapping, the analytic Jacobian vs. finite differences (4 states), the rest-state step, the GPS outage window, a noiseless-sensor tracking check, and the seeded end-to-end claim — EKF RMSE must beat both baselines, with outage max error under 5 m.
+Six tests: angle wrapping, the analytic Jacobian vs. finite differences (4 states), the rest-state step, the GPS outage window, a noiseless-sensor tracking check, and the seeded end-to-end claim - EKF RMSE must beat both baselines, with outage max error under 5 m.
 
 ## Outputs
 
@@ -141,7 +141,7 @@ The project plan allowed one week of building time before a hard ship date, and 
 
 ### Why not estimate the IMU biases?
 
-Real systems often add bias states to the filter. This project deliberately keeps the five-state model from the plan and absorbs the biases into the process noise instead — simpler to explain, and the outage behavior shows the cost honestly: uncertainty grows while coasting and the first fixes after the outage carry a few metres of transient error (first-5-seconds RMSE 3.54 m) before the filter settles.
+Real systems often add bias states to the filter. This project deliberately keeps the five-state model from the plan and absorbs the biases into the process noise instead - simpler to explain, and the outage behavior shows the cost honestly: uncertainty grows while coasting and the first fixes after the outage carry a few metres of transient error (first-5-seconds RMSE 3.54 m) before the filter settles.
 
 ### Why compare against "GPS hold" as well as raw GPS?
 
@@ -153,14 +153,14 @@ Raw-fix RMSE flatters GPS: it only scores the sensor at the moments it speaks. A
 - **Process noise was tuned on this scenario.** A small sweep against the seeded ground truth selected the per-step process noise; the GPS variance was *not* tuned (it is the true value). On real data the tuning would need to be redone from sensor datasheets and logs.
 - **2D, flat-earth, no GPS velocity.** The filter works in a local tangent plane and corrects position only. A production version would work in ECEF/geodetic coordinates or add Doppler/velocity measurements.
 - **Biases are modelled, not estimated** (see above).
-- The trajectory plot's dead-reckoning line is not exaggerated — 426 m of drift in 120 s is the point of the comparison.
+- The trajectory plot's dead-reckoning line is not exaggerated - 426 m of drift in 120 s is the point of the comparison.
 
 ## Possible next steps
 
 - Swap the synthetic feed for a public IMU+GPS dataset (the plan's "Path B") and re-tune from real noise characteristics.
 - Add accel/gyro bias states to the EKF and measure the outage improvement.
 - Add GPS velocity (Doppler) updates and compare heading observability at low speed.
-- Port the filter core to C++ (the language on-robot state estimation actually ships in) and wrap it as a ROS 2 node — which is exactly Project 3.
+- Port the filter core to C++ (the language on-robot state estimation actually ships in) and wrap it as a ROS 2 node - which is exactly Project 3.
 
 ## What this project demonstrates
 
