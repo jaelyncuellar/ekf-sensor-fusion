@@ -1,6 +1,6 @@
 # EKF Sensor Fusion — IMU + GPS
 
-An extended Kalman filter (EKF) that fuses high-rate IMU measurements with low-rate, noisy GPS fixes to estimate a moving platform's position, velocity, and heading — and quantifies exactly how much better fusion is than either sensor on its own.
+An extended Kalman filter (EKF) that fuses high-rate IMU measurements with low-rate, noisy GPS fixes to estimate a moving platform's position, velocity, and heading - and quantifies exactly how much better fusion is than either sensor on its own.
 
 This is Project 2 of a three-part robotics portfolio. Project 1 (detection + tracking) used a *linear* Kalman filter to predict where image detections would move next. This project takes the honest next step: a **nonlinear** motion model, an EKF with analytic Jacobians, and two new sensor types with opposite failure modes.
 
